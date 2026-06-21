@@ -7,5 +7,5 @@ export const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/oct
 export const CODESPACE_NAME = process.env.CODESPACE_NAME
 export const LOCAL_API_URL = `http://localhost:${PORT}`
 export const API_URL = CODESPACE_NAME
-  ? `https://${CODESPACE_NAME}-8000.githubpreview.dev`
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
   : LOCAL_API_URL
