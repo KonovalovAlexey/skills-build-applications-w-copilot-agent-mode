@@ -1,6 +1,6 @@
 import express from 'express'
-import mongoose from 'mongoose'
-import { PORT, MONGO_URI, API_URL } from './config.js'
+import { PORT, API_URL } from './config.js'
+import { connectDatabase } from './config/database.js'
 import usersRouter from './routes/users.js'
 import teamsRouter from './routes/teams.js'
 import activitiesRouter from './routes/activities.js'
@@ -26,8 +26,8 @@ app.use('/api/workouts', workoutsRouter)
 
 async function startServer() {
   try {
-    await mongoose.connect(MONGO_URI)
-    console.log('Connected to MongoDB at', MONGO_URI)
+    await connectDatabase()
+    console.log('Connected to MongoDB')
     app.listen(PORT, () => {
       console.log(`Server listening on http://localhost:${PORT}`)
     })
