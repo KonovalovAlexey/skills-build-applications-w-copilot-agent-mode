@@ -1,16 +1,16 @@
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
-import Activities from './components/Activities'
-import Leaderboard from './components/Leaderboard'
-import Teams from './components/Teams'
-import Users from './components/Users'
-import Workouts from './components/Workouts'
+import Activities from './components/Activities.jsx'
+import Leaderboard from './components/Leaderboard.jsx'
+import Teams from './components/Teams.jsx'
+import Users from './components/Users.jsx'
+import Workouts from './components/Workouts.jsx'
 import './App.css'
 
 const apiHost = import.meta.env.VITE_CODESPACE_NAME
   ? `${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
   : 'localhost:8000'
 
-const buildEndpoint = (subPath: string) => {
+const buildEndpoint = (subPath) => {
   const scheme = import.meta.env.VITE_CODESPACE_NAME ? 'https' : 'http'
   return `${scheme}://${apiHost}/api/${subPath}/`
 }

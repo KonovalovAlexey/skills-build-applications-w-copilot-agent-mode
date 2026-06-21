@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react'
 
-export interface Activity {
-  _id?: string
-  type?: string
-  userId?: string | { name?: string }
-  teamId?: string | { name?: string }
-  durationMinutes?: number
-  caloriesBurned?: number
-  createdAt?: string
-}
-
-const buildEndpoint = (subPath: string) => {
+// Example Codespace endpoint: https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities
+const buildEndpoint = (subPath) => {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME
   const baseHost = codespaceName ? `${codespaceName}-8000.app.github.dev` : 'localhost:8000'
-  return `https://${baseHost}/api/${subPath}/`
+  const scheme = codespaceName ? 'https' : 'http'
+  return `${scheme}://${baseHost}/api/${subPath}/`
 }
 
-const fetchJson = async <T,>(url: string): Promise<T> => {
+const fetchJson = async (url) => {
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error(`${response.status}: ${response.statusText}`)
@@ -24,7 +16,7 @@ const fetchJson = async <T,>(url: string): Promise<T> => {
   return response.json()
 }
 
-const normalizeResults = <T,>(data: any): T[] => {
+const normalizeResults = (data) => {
   if (Array.isArray(data)) return data
   if (data?.data && Array.isArray(data.data)) return data.data
   if (data?.results && Array.isArray(data.results)) return data.results
@@ -32,16 +24,16 @@ const normalizeResults = <T,>(data: any): T[] => {
 }
 
 function Activities() {
-  const [activities, setActivities] = useState<Activity[]>([])
-  const [error, setError] = useState<string | null>(null)
+  const [activities, setActivities] = useState([])
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const url = buildEndpoint('activities')
 
-    fetchJson<any>(url)
+    fetchJson(url)
       .then((result) => {
-        setActivities(normalizeResults<Activity>(result))
+        setActivities(normalizeResults(result))
       })
       .catch((fetchError) => {
         setError(String(fetchError))
