@@ -24,17 +24,4 @@ app.use('/api/activities', activitiesRouter)
 app.use('/api/leaderboard', leaderboardRouter)
 app.use('/api/workouts', workoutsRouter)
 
-async function startServer() {
-  try {
-    await connectDatabase()
-    console.log('Connected to MongoDB')
-    app.listen(PORT, () => {
-      console.log(`Server listening on http://localhost:${PORT}`)
-    })
-  } catch (error) {
-    console.error('Failed to connect to MongoDB:', error)
-    process.exit(1)
-  }
-}
-
-startServer()
+export default app
