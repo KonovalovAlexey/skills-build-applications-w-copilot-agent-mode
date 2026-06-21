@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "PORT=8000 tsx src/index.ts",
     "build": "tsc -p .",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "seed": "tsx src/scripts/seed.ts"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
