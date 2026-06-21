@@ -11,6 +11,18 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Environment variables
+
+This app uses Vite runtime env vars through `import.meta.env`. The frontend expects `VITE_CODESPACE_NAME` to build backend URLs in a GitHub Codespace.
+
+Define it in an ignored local file such as `.env.local`:
+
+```text
+VITE_CODESPACE_NAME=mysamplecodespace
+```
+
+If `VITE_CODESPACE_NAME` is not set, the client falls back safely to `http://localhost:8000`.
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
